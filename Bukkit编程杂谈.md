@@ -1405,14 +1405,14 @@ new [PotionEffect](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/potion/Po
 @EventHandler
 public void onJoin(PlayerJoinEvent event) {
     Player player = event.getPlayer();
-    player.setWalkSpeed(0.1f);
-    player.setFlySpeed(0.1f);
+    player.setWalkSpeed(0.1F);
+    player.setFlySpeed(0.1F);
     new BukkitRunnable() {
         @Override
         public void run() {
-            player.setWalkSpeed((player.getWalkSpeed() + 0.01f) > 1 ? 1 : (player.getWalkSpeed() + 0.01f));
+            player.setWalkSpeed(Math.min(1F,player.getWalkSpeed() + 0.01F));
             player.sendMessage("WALK:" + player.getWalkSpeed());
-            player.setFlySpeed((player.getFlySpeed() + 0.01f) > 1 ? 1 : (player.getFlySpeed() + 0.01f));
+			player.setFlySpeed(Math.min(1F,player.getFlySpeed() + 0.01F));
             player.sendMessage("FLY:" + player.getFlySpeed());
         }
     }.runTaskTimer(this, 0L, 5L);
